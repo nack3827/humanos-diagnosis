@@ -248,7 +248,9 @@ def full_diagnosis(input_data: HumanOSDiagnosisInput):
     # ② 人間化
     human_text = humanize(result)
     
+    import json
+
     return {
-        "raw": result,
+        "raw": json.loads(json.dumps(result, default=str)),
         "human": human_text
     }
