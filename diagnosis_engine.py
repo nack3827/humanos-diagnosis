@@ -448,9 +448,9 @@ HumanOS診断レポート - 総合評価：{status}（{score:.1f}/100点）
         recommendations = self.generate_recommendations(analysis, bugs)
         
         return HumanOSDiagnosisOutput(
-            analysis=analysis,
-            bugs=bugs,
-            improvement_proposals=improvements,
+            analysis=HumanOSAnalysis(**analysis) if isinstance(analysis, dict) else analysis,
+            bugs=[SystemBug(**b) if isinstance(b, dict) else b for b in bugs],
+            improvement_proposals=[ImprovementProposal(**i) if isinstance(i, dict) else i for i in improvements],
             summary=summary,
             recommendations=recommendations,
             created_at=datetime.now()
