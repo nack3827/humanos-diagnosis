@@ -250,7 +250,10 @@ def full_diagnosis(input_data: HumanOSDiagnosisInput):
     
     import json
 
+    result_dict = json.loads(result.json())
+    human_text = humanize(result_dict)
+
     return {
-        "raw": json.loads(json.dumps(result, default=str)),
-        "human": human_text
-    }
+    "raw": result_dict,
+    "human": human_text
+}
