@@ -354,7 +354,7 @@ class HumanOSDiagnosisEngine:
         
         return HumanOSAnalysis(
             overall_score=overall_score,
-            system_structure=system_structure,
+            system_structure=SystemStructure(**system_structure) if isinstance(system_structure, dict) else system_structure,
             strengths=strengths,
             weaknesses=weaknesses,
             patterns=patterns
@@ -448,10 +448,10 @@ HumanOS診断レポート - 総合評価：{status}（{score:.1f}/100点）
         recommendations = self.generate_recommendations(analysis, bugs)
         
         return HumanOSDiagnosisOutput(
-       analysis=analysis,
-        bugs=bugs,
-        improvement_proposals=improvements,
-        summary=summary,
-        recommendations=recommendations,
-        created_at=datetime.now()
-)
+            analysis=analysis,
+            bugs=bugs,
+            improvement_proposals=improvements,
+            summary=summary,
+            recommendations=recommendations,
+            created_at=datetime.now()
+        )
