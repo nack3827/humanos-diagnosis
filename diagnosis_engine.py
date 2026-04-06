@@ -354,7 +354,7 @@ class HumanOSDiagnosisEngine:
         
         return HumanOSAnalysis(
             overall_score=overall_score,
-            system_structure=SystemStructure(**system_structure) if isinstance(system_structure, dict) else system_structure,
+            system_structure=system_structure,
             strengths=strengths,
             weaknesses=weaknesses,
             patterns=patterns
