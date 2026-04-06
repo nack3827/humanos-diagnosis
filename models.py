@@ -84,11 +84,14 @@ class ImprovementProposal(BaseModel):
 
 
 class HumanOSAnalysis(BaseModel):
-    overall_score: float = Field(ge=0.0, le=100.0, description="総合スコア")
+    overall_score: float = Field(..., ge=0.0, le=100.0, description="総合スコア")
     system_structure: SystemStructure = Field(..., description="システム構造分析")
     strengths: List[str] = Field(..., description="強み")
     weaknesses: List[str] = Field(..., description="弱み")
     patterns: List[str] = Field(..., description="観察されるパターン")
+    
+    class Config:
+        arbitrary_types_allowed = True
 
 
 class HumanOSDiagnosisOutput(BaseModel):
@@ -98,3 +101,6 @@ class HumanOSDiagnosisOutput(BaseModel):
     summary: str = Field(..., description="要約")
     recommendations: List[str] = Field(..., description="推奨事項")
     created_at: datetime = Field(default_factory=datetime.now, description="診断作成日時")
+    
+    class Config:
+        arbitrary_types_allowed = True

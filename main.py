@@ -246,14 +246,13 @@ def full_diagnosis(input_data: HumanOSDiagnosisInput):
     result = diagnosis_engine.diagnose(input_data)
     
     # ② 人間化
-    human_text = humanize(result)
-    
     import json
-
-    result_dict = json.loads(result.json())
+    
+    # Pydantic v1では.dict()メソッドを使用
+    result_dict = result.dict()
     human_text = humanize(result_dict)
 
     return {
-    "raw": result_dict,
-    "human": human_text
-}
+        "raw": result_dict,
+        "human": human_text
+    }
